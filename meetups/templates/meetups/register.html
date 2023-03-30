@@ -1,0 +1,22 @@
+{% extends 'meetups/base/base.html' %}
+{% load static %}
+{% block title %}
+Register
+{% endblock%}
+
+{% block site_css %}
+<link rel="stylesheet" href="{% static 'meetups/styles/meetup-detail.css' %}"/>
+<link rel="stylesheet" href="{% static 'meetups/styles/registration-confirmation.css' %}">
+{% endblock  %}
+
+{% block body %}
+<form action="" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <br />
+    <div id="registration-actions">
+        <button>Register</button>
+    </div>
+</form>
+{% endblock  %}

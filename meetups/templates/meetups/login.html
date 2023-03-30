@@ -1,0 +1,21 @@
+{% extends 'meetups/base/base.html' %}
+{% load static %}
+{% block title %}
+Login
+{% endblock%}
+
+{% block site_css %}
+<link rel="stylesheet" href="{% static 'meetups/styles/meetup-detail.css' %}"/>
+<link rel="stylesheet" href="{% static 'meetups/styles/registration-confirmation.css' %}">
+{% endblock  %}
+
+{% block body %}
+<form action="" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <br />
+    <div id="registration-actions">
+        <button>Login</button> 
+    </div>
+    <p>Don't have an account yet?  <a style="text-decoration: none; color:black;" href="{% url 'Register' %}">Sign up  here!</a></p>
+{% endblock  %}

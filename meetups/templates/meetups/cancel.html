@@ -1,0 +1,19 @@
+{% extends 'meetups/base/base.html' %} 
+{% load static %} 
+{% block title %}
+You cancelled successfully!
+{% endblock%}
+
+{% block site_css %}
+<link rel="stylesheet" href="{% static 'meetups/styles/registration-confirmation.css' %}">
+{% endblock  %}
+
+{% block main_heading %}
+{% endblock  %}
+
+{% block body %}
+<section id="confirmation">
+    <h2>You cancelled successfully!</h2>
+    <p>Got questions or can't make it? Please <a href="mailto:{{organizer_email}}">contact the organizer</a> ahead of time!</p>
+</section>
+{% endblock  %}

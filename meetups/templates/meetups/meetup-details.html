@@ -1,0 +1,68 @@
+{% extends 'meetups/base/base.html' %}
+{% load static %}
+
+{% block title %}
+  {{meetup.title}}
+{% endblock %}
+
+{% block site_css %}
+  <link rel="stylesheet" href="{% static 'meetups/styles/meetup-detail.css' %}"/>
+{% endblock %}
+
+{% block logitem %}
+  {% include 'meetups/includes/login_or_logout.html' %}
+{% endblock %}
+
+{% block main_heading%}
+  {{meetup.title}}
+{% endblock %}
+
+{% block body %}
+{% if meetup_found %}
+  <article>
+    <img id="main-image" src="{{meetup.image.url}}" alt="{{meetup.title}}" />
+    <section id="location">
+      <h2>Meetup Location</h2>
+      <address>
+        This meetup takes place in <span>{{meetup.location.name}}</span>({{meetup.location.address}}).
+      </address>
+    </section>
+    <section id="details">
+      <h2>What's This Meetup About?</h2>
+      <p>{{meetup.description}}</p>
+      <footer>
+        <p>
+          Need more details? Please
+          <a href="mailto:{{meetup.organizer_email}}">contact the organizer</a>
+        </p>
+      </footer>
+      <section id="registration">
+        {% if user.is_authenticated %}
+        {% if not excist  %}
+        <h2>Join us!</h2>
+        <form action="{% url 'meetup-detail' meetup.slug %}" method="POST">
+          {% csrf_token %}
+          <div id="registration-actions">
+            <button>Register</button>
+          </div>
+        </form>
+        {% else %}
+          <h2>You have been registered!</h2>
+          <form action="{% url 'cancel' meetup.slug %}" method="POST">
+            {% csrf_token %}
+            <div id="registration-actions">
+              <button>Cancel</button>
+            </div>
+          </form>
+        {% endif %}
+        {% else %}
+        <a href="{% url 'Login' %}"><button>Click to login page</button></a>
+        {% endif %}
+      </section>
+    </section>
+  </article>
+{% else %}
+<p>No meetup found for this slug , sorry!</p>
+{% endif %}
+
+{% endblock %}
